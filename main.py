@@ -9,9 +9,15 @@ planets_df = df[['pl_name', 'pl_orbper','pl_orbsmax','pl_bmassj','pl_radj','pl_d
 
 db = planets_df.dropna()
 db = db.reset_index()
+db = pd.DataFrame.drop(db,'index', axis=1)
 print(len(db))
-db = pd.DataFrame.drop(db, 'index', axis=1)
-db.columns = ['Planet','Period','Orbit Semi-Major Axis','Planet Mass','Planet Radius','Planet Density','Right Ascension','Declination','Solar Brightness','Distance','Temperature','Solar Mass','Solar Radii']
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_rows', None)
-print(db)
+print(db.head())
+db.columns = ['Planet','Period','Orbit Semi-Major Axis','Mass','Radius','Density','Ascension','Declination','Solar Brightness','Distance','Temperature','Solar Mass','Solar Radii']
+#pd.set_option('display.max_columns', None)
+#pd.set_option('display.max_rows', None)
+print(db.head())
+db = db.rename(index=db['Planet'])
+db = pd.DataFrame.drop(db,'Planet', axis=1)
+DataMatrix = db.values
+np.set_printoptions(threshold = np.inf)
+print(DataMatrix)
