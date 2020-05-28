@@ -2,6 +2,8 @@
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 def read_database():
     df = pd.read_csv('./planets_db.csv')
@@ -31,6 +33,15 @@ def main():
     #np.set_printoptions(threshold = np.inf)
     db = read_database()
     dataMatrix = creat_matrix(db)
+    prop1 = 'Density'
+    prop2 = 'Declination'
+    X = db[[prop1,prop2]]
+#Visualise data points
+    sns.set()
+    plt.scatter(X[prop1], X[prop2], c='black')
+    plt.xlabel(prop1)
+    plt.ylabel(prop2)
+    plt.show()
 
 if __name__ == "__main__":
     main()
