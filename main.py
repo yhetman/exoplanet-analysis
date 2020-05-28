@@ -33,9 +33,13 @@ def main():
     #np.set_printoptions(threshold = np.inf)
     db = read_database()
     dataMatrix = creat_matrix(db)
+    stdev = np.std(dataMatrix, axis = 0)
+    whitened = whiten(dataMatrix)
+    means, _ = kmeans(whitened, 36)
     prop1 = 'Density'
     prop2 = 'Declination'
     X = db[[prop1,prop2]]
+
 #Visualise data points
     sns.set()
     plt.scatter(X[prop1], X[prop2], c='black')
