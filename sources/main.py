@@ -18,32 +18,43 @@ def draw_histogram(centers, matches):
     plt.title('Clustering of exoplanets')
     plt.show()
 
-def create_table(db, centrioids):
-    sns.set()
-    fig, ax = plt.subplots(1,1)
+
+def create_DFrame(db,centrioids):
     db = db.rename(index = db['Planet'])
     db = pd.DataFrame.drop(db,'Planet', axis=1)
-    columns = db.columns
     n_rows = len(centrioids)
-    ax.axis('tight')
-    ax.axis('off')
-    ax.margins(1,1)
-    rows = ['%d cluster' % (x + 1) for x in range(n_rows)]
-    print(rows, columns)
-    index = np.arange(len(columns)) + 0.3
-    bar_width = 0.4
-    y_offset = np.zeros(len(columns))
     cell_text = []
+    y_offset = np.zeros(len(db.columns))
     for row in range(n_rows):
-#       plt.bar(index, centrioids[row], bar_width, bottom = y_offset)
         y_offset += centrioids[row]
         cell_text.append(['%.3f' % x for x in y_offset])
         cell_text.reverse()
-        the_table = plt.table(cellText = cell_text, colLabels=columns, loc='center') #,rowLabels=rows,
+    rows = pd.Index(['%d cluster' % (x + 1) for x in range(n_rows)])
+    DFrame = pd.DataFrame(cell_text, columns = db.columns,index = rows)
+    print(DFrame)
+    return DFrame
+
+def create_table(df):
+    sns.set()
+    fig, ax = plt.subplots()
+#    n_rows = len(centrioids)
+    ax.margins(0.1,0.1)
+    ax.axis('tight')
+    ax.axis('off')
+    widths = []
+    for i in df.columns:
+        print(len(i), i)
+        k = len(i)
+        if k < 10:
+            k = 10
+        widths.append(k/120)
+#    bar_width = 0.4
+    the_table = ax.table(cellText = df.values, rowLabels = df.index, colLabels = df.columns, colWidths=widths,loc = 'center')
+#    the_table = ax.table(df.values, colWidths=widths,rowLabels=df.index, colLabels=df.columns, loc='center')
 #    the_table = ax.table(cellText = centrioids, colLabels = columns, loc='center')
     the_table.auto_set_font_size(False)
     the_table.set_fontsize(10)
-    the_table.scale(1,2)
+    the_table.scale(1,3)
     plt.show()
 
 def main():
@@ -55,8 +66,9 @@ def main():
     centrioids = define_centrioids(dataMatrix)
     matches = count_matches(centrioids, dataMatrix)
 #   max_count = max(matches)
+    df = create_DFrame(db, centrioids)
 #    draw_histogram(centrioids, matches)
-    create_table(db, centrioids)
+    create_table(df)
 #    n_rows = len(centrioids)
 #    axs[0].axis('tight')
 #    axs[0].axis('off')
