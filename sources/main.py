@@ -12,7 +12,7 @@ def draw_histogram(centers, matches):
     sns.set()
     fig, ax = plt.subplots(1,1)
     nb_rows = range(len(centers))
-    axs[1].bar(nb_rows, matches, tick_label = nb_rows, width = 0.8, color = ['blue', 'green']) 
+    ax.bar(nb_rows, matches, tick_label = nb_rows, width = 0.8, color = ['blue', 'green']) 
     plt.xlabel('Clusters') 
     plt.ylabel('Number of planets') 
     plt.title('Clustering of exoplanets')
