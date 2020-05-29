@@ -37,7 +37,6 @@ def create_DFrame(db,centrioids):
 def create_table(df):
     sns.set()
     fig, ax = plt.subplots()
-#    n_rows = len(centrioids)
     ax.margins(0.1,0.1)
     ax.axis('tight')
     ax.axis('off')
@@ -48,10 +47,7 @@ def create_table(df):
         if k < 10:
             k = 10
         widths.append(k/120)
-#    bar_width = 0.4
     the_table = ax.table(cellText = df.values, rowLabels = df.index, colLabels = df.columns, colWidths=widths,loc = 'center')
-#    the_table = ax.table(df.values, colWidths=widths,rowLabels=df.index, colLabels=df.columns, loc='center')
-#    the_table = ax.table(cellText = centrioids, colLabels = columns, loc='center')
     the_table.auto_set_font_size(False)
     the_table.set_fontsize(10)
     the_table.scale(1,3)
@@ -65,37 +61,10 @@ def main():
     dataMatrix = create_matrix(db)
     centrioids = define_centrioids(dataMatrix)
     matches = count_matches(centrioids, dataMatrix)
-#   max_count = max(matches)
     df = create_DFrame(db, centrioids)
-#    draw_histogram(centrioids, matches)
+    draw_histogram(centrioids, matches)
     create_table(df)
-#    n_rows = len(centrioids)
-#    axs[0].axis('tight')
-#    axs[0].axis('off')
-#   the_table = axs[0].table(cellText = centrioids, colLabels = columns, loc='center')
-#   axs[1].plot(clust_data[:,0],clust_data[:,1])
     print(centrioids)
-
-#   rows = ['%d cluster' % (x + 1) for x in range(n_rows)]
-#   index = np.arange(len(columns)) + 0.3
-#   bar_width = 0.4
-#   y_offset = np.zeros(len(columns))
-#   cell_text = []
-#   for row in range(n_rows):
-#       plt.bar(index, centrioids[row], bar_width, bottom = y_offset)
-#       y_offset += centrioids[row]
-#       cell_text.append(['%1.1f' % x for x in y_offset])
-#       cell_text.reverse()
-#   the_table = plt.table(cellText = cell_text, rowLabels = rows, colLabels=columns, loc='bottom')
-#   plt.subplots_adjust(left=0.2, bottom=0.2)
-#   prop1 = 'Density'
-#   prop2 = 'Declination'
-#   X = db[[prop1,prop2]]
-#   sns.set()
-#   plt.scatter(X[prop1], X[prop2], c='black')
-#   plt.xlabel(prop1)
-#   plt.ylabel(prop2)
-#   plt.show()
 
 if __name__ == "__main__":
     main()
