@@ -18,6 +18,34 @@ def draw_histogram(centers, matches):
     plt.title('Clustering of exoplanets')
     plt.show()
 
+def create_table(db, centrioids):
+    sns.set()
+    fig, ax = plt.subplots(1,1)
+    db = db.rename(index = db['Planet'])
+    db = pd.DataFrame.drop(db,'Planet', axis=1)
+    columns = db.columns
+    n_rows = len(centrioids)
+    ax.axis('tight')
+    ax.axis('off')
+    ax.margins(1,1)
+    rows = ['%d cluster' % (x + 1) for x in range(n_rows)]
+    print(rows, columns)
+    index = np.arange(len(columns)) + 0.3
+    bar_width = 0.4
+    y_offset = np.zeros(len(columns))
+    cell_text = []
+    for row in range(n_rows):
+#       plt.bar(index, centrioids[row], bar_width, bottom = y_offset)
+        y_offset += centrioids[row]
+        cell_text.append(['%.3f' % x for x in y_offset])
+        cell_text.reverse()
+        the_table = plt.table(cellText = cell_text, colLabels=columns, loc='center') #,rowLabels=rows,
+#    the_table = ax.table(cellText = centrioids, colLabels = columns, loc='center')
+    the_table.auto_set_font_size(False)
+    the_table.set_fontsize(10)
+    the_table.scale(1,2)
+    plt.show()
+
 def main():
 #   pd.set_option('display.max_columns', None)
 #   pd.set_option('display.max_rows', None)
@@ -27,21 +55,13 @@ def main():
     centrioids = define_centrioids(dataMatrix)
     matches = count_matches(centrioids, dataMatrix)
 #   max_count = max(matches)
-    draw_histogram(centrioids, matches)
-    db = db.rename(index = db['Planet'])
-    db = pd.DataFrame.drop(db,'Planet', axis=1)
-    columns = db.columns
+#    draw_histogram(centrioids, matches)
+    create_table(db, centrioids)
 #    n_rows = len(centrioids)
 #    axs[0].axis('tight')
 #    axs[0].axis('off')
 #   the_table = axs[0].table(cellText = centrioids, colLabels = columns, loc='center')
 #   axs[1].plot(clust_data[:,0],clust_data[:,1])
-#    nb_rows = range(len(centrioids))
-#    axs[1].bar(nb_rows, matches, tick_label = nb_rows, width = 0.8, color = ['blue', 'green']) 
-#    plt.xlabel('Clusters') 
-#    plt.ylabel('Number of planets') 
-#    plt.title('Clustering of exoplanets')
-#    plt.show()
     print(centrioids)
 
 #   rows = ['%d cluster' % (x + 1) for x in range(n_rows)]
