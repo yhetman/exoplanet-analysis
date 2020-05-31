@@ -10,7 +10,7 @@ def perform_kmeans(dataMatrix):
 #   st = "======"
 #   for i in range(len(dataMatrix)):
 #   print (dataMatrix[i],st,whitened[i])
-    means, _ = kmeans(whitened, 5)
+    means, _ = kmeans(whitened, 36)
     return means
 
 

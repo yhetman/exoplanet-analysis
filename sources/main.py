@@ -54,17 +54,18 @@ def create_table(df):
     plt.show()
 
 def main():
-#   pd.set_option('display.max_columns', None)
-#   pd.set_option('display.max_rows', None)
-#   np.set_printoptions(threshold = np.inf)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_rows', None)
+    np.set_printoptions(threshold = np.inf)
     db = read_database()
-    dataMatrix = create_matrix(db)
-    centrioids = define_centrioids(dataMatrix)
-    matches = count_matches(centrioids, dataMatrix)
-    df = create_DFrame(db, centrioids)
-    draw_histogram(centrioids, matches)
-    create_table(df)
-    print(centrioids)
+    print(db.head())
+#    dataMatrix = create_matrix(db)
+#    centrioids = define_centrioids(dataMatrix)
+#    matches = count_matches(centrioids, dataMatrix)
+#    df = create_DFrame(db, centrioids)
+#    draw_histogram(centrioids, matches)
+#    create_table(df)
+#    print(centrioids)
 
 if __name__ == "__main__":
     main()

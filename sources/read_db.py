@@ -7,15 +7,14 @@ import pandas as pd
 def read_database():
     df = pd.read_csv('../planets_db.csv')
     planets_df = df[['pl_name', 'pl_orbper','pl_orbsmax','pl_bmassj',
-        'pl_radj','pl_dens','ra','dec','st_optmag','st_dist',
+        'pl_radj','pl_dens','st_optmag','st_dist',
         'st_teff','st_mass','st_rad']]
     db = planets_df.dropna()
     db = db.reset_index()
     db = pd.DataFrame.drop(db,'index', axis=1)
-    db.columns = ['Planet','Period','Orbit Semi-Major Axis',
-            'Mass','Radius','Density','Ascension','Declination',
-            'Solar Brightness','Distance','Temperature',
-            'Solar Mass','Solar Radii']
+    db.columns = ['Planet','Period','Longest OR',
+            'Mass','Radius','Density', 'Solar Brightness','Distance',
+            'Temperature', 'Solar Mass','Solar Radii']
     return db
 
 
