@@ -53,7 +53,7 @@ def create_table(df):
                          colWidths=widths,loc = 'center')
     the_table.auto_set_font_size(False)
     the_table.set_fontsize(10)
-    the_table.scale(1,3)
+    the_table.scale(1,2)
     plt.show()
 
 def main():
