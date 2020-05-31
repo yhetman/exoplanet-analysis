@@ -11,7 +11,7 @@ from algorithm import *
 def draw_histogram(centers, matches):
     sns.set()
     fig, ax = plt.subplots(1,1)
-    nb_rows = range(len(centers))
+    nb_rows = np.arange(1, len(centers) + 1, 1)
     ax.bar(nb_rows, matches, tick_label = nb_rows, width = 0.8, color = ['blue', 'green']) 
     plt.xlabel('Clusters') 
     plt.ylabel('Number of planets') 

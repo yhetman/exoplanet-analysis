@@ -7,7 +7,7 @@ from scipy.cluster.vq import kmeans , whiten
 
 def perform_kmeans(dataMatrix):
     whitened = whiten(dataMatrix)
-    means, _ = kmeans(whitened, 36)
+    means, _ = kmeans(whitened, 10)
     return means
 
 
@@ -21,12 +21,12 @@ def define_centrioids(dataMatrix):
 
 
 def count_distance(a, b):
-    (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12) = a
-    (b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12) = b
+    (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) = a
+    (b1, b2, b3, b4, b5, b6, b7, b8, b9, b10) = b
     dist = sqrt((a1 - b1)**2 + (a2 - b2)**2 + (a3 - b3)**2 +
             (a4 - b4)**2 + (a5 - b5)**2 + (a6 - b6)**2 +
             (a7 - b7)**2 +(a8 - b8)**2 +(a9 - b9)**2 +
-            (a10 - b10)**2 + (a11 - b11)**2 +(a12 - b12)**2)
+            (a10 - b10)*2)
     return dist
 
 
