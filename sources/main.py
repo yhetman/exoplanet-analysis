@@ -47,7 +47,8 @@ def create_table(df):
         if k < 10:
             k = 10
         widths.append(k/120)
-    the_table = ax.table(cellText = df.values, rowLabels = df.index, colLabels = df.columns, colWidths=widths,loc = 'center')
+    the_table = ax.table(cellText = df.values, rowLabels = df.index,
+                         colLabels = df.columns, colWidths=widths,loc = 'center')
     the_table.auto_set_font_size(False)
     the_table.set_fontsize(10)
     the_table.scale(1,3)
