@@ -33,9 +33,6 @@ def count_distance(a, b):
 def count_matches(centers, dataMatrix):
     matches = [0] * (len(centers))
     for i, a in enumerate(dataMatrix):
-#       print (i, "===", row)
-#       for a in row:
-#       print(a)
         distances = [count_distance(a, b) for b in centers]
         min_index = distances.index(min(distances))
         matches[min_index] += 1
