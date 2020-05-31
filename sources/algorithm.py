@@ -7,9 +7,6 @@ from scipy.cluster.vq import kmeans , whiten
 
 def perform_kmeans(dataMatrix):
     whitened = whiten(dataMatrix)
-#   st = "======"
-#   for i in range(len(dataMatrix)):
-#   print (dataMatrix[i],st,whitened[i])
     means, _ = kmeans(whitened, 36)
     return means
 
